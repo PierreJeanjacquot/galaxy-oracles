@@ -4,6 +4,7 @@ import { config } from "./wagmiConfig";
 import ConnectButton from "./ConnectButton";
 import IExecAccountWidget from "./IExecAccountWidget";
 import CreateOracle from "./CreateOracle";
+import AppChecksum from "./components/AppChecksum";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ function App() {
           <div style={{ padding: "1rem 3rem", display: "grid", gap: "1rem" }}>
             <IExecAccountWidget />
             <CreateOracle />
+            <AppChecksum />
           </div>
         </div>
       </QueryClientProvider>
