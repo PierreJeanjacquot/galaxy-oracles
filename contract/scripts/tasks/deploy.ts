@@ -16,18 +16,47 @@ task('deploy', 'Deploy all contracts')
     const balance = await ethers.provider.getBalance(deployer.address)
     console.log('Balance: ', ethers.utils.formatEther(balance))
 
-    // Deploy Oracle
+    // Deploy GalaxyOracleVerifier
 
-    const Oracle = await ethers.getContractFactory('Oracle')
-    const oracleArg: [] = []
-    const oracle = await Oracle.deploy(...oracleArg)
+    // const GalaxyOracleVerifier = await ethers.getContractFactory('GalaxyOracleVerifier')
+    // // add addrees and a byte32 as argument into the galaxyOracleVerifierArg array
 
-    await oracle.deployed()
+    // const galaxyOracleVerifierArg: [string] = ['0xEea268c48a54d6434EAAC9C15B9301B13B58Ca09']
+    // const galaxyOracleVerifier = await GalaxyOracleVerifier.deploy(...galaxyOracleVerifierArg)
+
+    // await galaxyOracleVerifier.deployed()
+
+    // if (verify) {
+    //   await verifyAddress(galaxyOracleVerifier.address, galaxyOracleVerifierArg)
+    // }
+
+    // console.log('Deployed galaxyOracleVerifier at', galaxyOracleVerifier.address)
+    // setDeploymentProperty(
+    //   network.name,
+    //   DeploymentProperty.GalaxyOracleVerifier,
+    //   galaxyOracleVerifier.address,
+    // )
+
+    // deploy the factory
+
+    const GalaxyOracleVerifierFactory = await ethers.getContractFactory(
+      'GalaxyOracleVerifierFactory',
+    )
+    const galaxyOracleVerifierFactoryArg: [] = []
+    const galaxyOracleVerifierFactory = await GalaxyOracleVerifierFactory.deploy(
+      ...galaxyOracleVerifierFactoryArg,
+    )
+
+    await galaxyOracleVerifierFactory.deployed()
 
     if (verify) {
-      await verifyAddress(oracle.address, oracleArg)
+      await verifyAddress(galaxyOracleVerifierFactory.address, galaxyOracleVerifierFactoryArg)
     }
 
-    console.log('Deployed Oracle at', oracle.address)
-    setDeploymentProperty(network.name, DeploymentProperty.Oracle, oracle.address)
+    console.log('Deployed galaxyOracleVerifier at', galaxyOracleVerifierFactory.address)
+    setDeploymentProperty(
+      network.name,
+      DeploymentProperty.GalaxyOracleVerifierFactory,
+      galaxyOracleVerifierFactory.address,
+    )
   })

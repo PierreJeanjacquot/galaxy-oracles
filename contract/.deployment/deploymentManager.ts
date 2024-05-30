@@ -1,7 +1,8 @@
 import * as fs from 'fs'
 
 export enum DeploymentProperty {
-  Oracle = 'Oracle',
+  GalaxyOracleVerifier = 'GalaxyOracleVerifier',
+  GalaxyOracleVerifierFactory = 'GalaxyOracleVerifierFactory',
 }
 
 const loadJSON = (network: string) => {
