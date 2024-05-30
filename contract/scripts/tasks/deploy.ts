@@ -18,24 +18,24 @@ task('deploy', 'Deploy all contracts')
 
     // Deploy GalaxyOracleVerifier
 
-    // const GalaxyOracleVerifier = await ethers.getContractFactory('GalaxyOracleVerifier')
-    // // add addrees and a byte32 as argument into the galaxyOracleVerifierArg array
+    const GalaxyOracleVerifier = await ethers.getContractFactory('GalaxyOracleVerifier')
+    // add addrees and a byte32 as argument into the galaxyOracleVerifierArg array
 
-    // const galaxyOracleVerifierArg: [string] = ['0xEea268c48a54d6434EAAC9C15B9301B13B58Ca09']
-    // const galaxyOracleVerifier = await GalaxyOracleVerifier.deploy(...galaxyOracleVerifierArg)
+    const galaxyOracleVerifierArg: [string] = ['0xEea268c48a54d6434EAAC9C15B9301B13B58Ca09']
+    const galaxyOracleVerifier = await GalaxyOracleVerifier.deploy(...galaxyOracleVerifierArg)
 
-    // await galaxyOracleVerifier.deployed()
+    await galaxyOracleVerifier.deployed()
 
-    // if (verify) {
-    //   await verifyAddress(galaxyOracleVerifier.address, galaxyOracleVerifierArg)
-    // }
+    if (verify) {
+      await verifyAddress(galaxyOracleVerifier.address, galaxyOracleVerifierArg)
+    }
 
-    // console.log('Deployed galaxyOracleVerifier at', galaxyOracleVerifier.address)
-    // setDeploymentProperty(
-    //   network.name,
-    //   DeploymentProperty.GalaxyOracleVerifier,
-    //   galaxyOracleVerifier.address,
-    // )
+    console.log('Deployed galaxyOracleVerifier at', galaxyOracleVerifier.address)
+    setDeploymentProperty(
+      network.name,
+      DeploymentProperty.GalaxyOracleVerifier,
+      galaxyOracleVerifier.address,
+    )
 
     // deploy the factory
 

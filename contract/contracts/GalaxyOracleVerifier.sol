@@ -7,7 +7,7 @@ contract GalaxyOracleVerifier {
 
     // Type hash for the payload structure
     bytes32 public constant PAYLOAD_TYPEHASH =
-        keccak256("Payload(uint256 timestamp,string type,bytes value,bytes32 salt)");
+        keccak256("Payload(uint256 timestamp,string payloadType,bytes value,bytes32 salt)");
 
     // Domain separator used to prevent signature replay across different domains
     bytes32 public DOMAIN_SEPARATOR;
@@ -35,13 +35,7 @@ contract GalaxyOracleVerifier {
     function hashPayload(Payload memory payload) internal pure returns (bytes32) {
         return
             keccak256(
-                abi.encode(
-                    PAYLOAD_TYPEHASH,
-                    payload.timestamp,
-                    keccak256(bytes(payload.payloadType)),
-                    keccak256(payload.value),
-                    payload.salt
-                )
+                abi.encode(PAYLOAD_TYPEHASH, payload.timestamp, bytes(payload.payloadType), payload.value, payload.salt)
             );
     }
 
@@ -55,9 +49,9 @@ contract GalaxyOracleVerifier {
     }
 
     // Function to recover the signer address from a signed message hash and signature
-    function recoverSigner(bytes32 _ethSignedMessageHash, bytes memory _signature) public pure returns (address) {
+    function recoverSigner(bytes32 _digest, bytes memory _signature) public pure returns (address) {
         (bytes32 r, bytes32 s, uint8 v) = splitSignature(_signature);
-        return ecrecover(_ethSignedMessageHash, v, r, s);
+        return ecrecover(_digest, v, r, s);
     }
 
     // Function to split a signature into its r, s, and v components
