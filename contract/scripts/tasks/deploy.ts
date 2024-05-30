@@ -16,6 +16,29 @@ task('deploy', 'Deploy all contracts')
     const balance = await ethers.provider.getBalance(deployer.address)
     console.log('Balance: ', ethers.utils.formatEther(balance))
 
+    // deploy the factory
+
+    const GalaxyOracleVerifierFactory = await ethers.getContractFactory(
+      'GalaxyOracleVerifierFactory',
+    )
+    const galaxyOracleVerifierFactoryArg: [] = []
+    const galaxyOracleVerifierFactory = await GalaxyOracleVerifierFactory.deploy(
+      ...galaxyOracleVerifierFactoryArg,
+    )
+
+    await galaxyOracleVerifierFactory.deployed()
+
+    if (verify) {
+      await verifyAddress(galaxyOracleVerifierFactory.address, galaxyOracleVerifierFactoryArg)
+    }
+
+    console.log('Deployed GalaxyOracleVerifierFactory at', galaxyOracleVerifierFactory.address)
+    setDeploymentProperty(
+      network.name,
+      DeploymentProperty.GalaxyOracleVerifierFactory,
+      galaxyOracleVerifierFactory.address,
+    )
+
     // Deploy GalaxyOracleVerifier
 
     const GalaxyOracleVerifier = await ethers.getContractFactory('GalaxyOracleVerifier')
@@ -35,28 +58,5 @@ task('deploy', 'Deploy all contracts')
       network.name,
       DeploymentProperty.GalaxyOracleVerifier,
       galaxyOracleVerifier.address,
-    )
-
-    // deploy the factory
-
-    const GalaxyOracleVerifierFactory = await ethers.getContractFactory(
-      'GalaxyOracleVerifierFactory',
-    )
-    const galaxyOracleVerifierFactoryArg: [] = []
-    const galaxyOracleVerifierFactory = await GalaxyOracleVerifierFactory.deploy(
-      ...galaxyOracleVerifierFactoryArg,
-    )
-
-    await galaxyOracleVerifierFactory.deployed()
-
-    if (verify) {
-      await verifyAddress(galaxyOracleVerifierFactory.address, galaxyOracleVerifierFactoryArg)
-    }
-
-    console.log('Deployed galaxyOracleVerifier at', galaxyOracleVerifierFactory.address)
-    setDeploymentProperty(
-      network.name,
-      DeploymentProperty.GalaxyOracleVerifierFactory,
-      galaxyOracleVerifierFactory.address,
     )
   })
