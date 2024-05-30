@@ -14,10 +14,10 @@ const app = {
     entrypoint: "node /app/src/deployer.js",
     heapSize: 1073741824,
     fingerprint:
-      "4fd1222882036ac08c2f734b41fdfa3649e608836e8c4f742243a1ee9d9e9ae3", // scone fingerprint (from `docker run --rm -e SCONE_HASH=1 <app-image>`)
+      "0840b3373aff4d937dcc2d556bfb3a8f0d9afe9ebf4f5fc09e223da86122490d", // scone fingerprint (from `docker run --rm -e SCONE_HASH=1 <app-image>`)
   },
   checksum:
-    "0x3a090590720baac37c21d5641b5c29e9981244f6d4e9a0f5a7761beff52b1115", // docker image digest (from `docker pull <app-image> | grep "Digest: sha256:" | sed 's/.*sha256:/0x/'`)
+    "0xfb5f878941e46781d0e8e7c840c2984c64fceefeca4861a1987b6a65adba378d", // docker image digest (from `docker pull <app-image> | grep "Digest: sha256:" | sed 's/.*sha256:/0x/'`)
 };
 
 console.log(`Deploying app: ${JSON.stringify(app, null, 2)}`);

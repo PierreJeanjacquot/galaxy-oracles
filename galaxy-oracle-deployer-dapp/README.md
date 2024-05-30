@@ -42,8 +42,8 @@ docker run -v $PWD/iexec_out:/iexec_out -e IEXEC_OUT=/iexec_out --rm pierreiexec
 docker
 
 - image: "pierreiexec/galaxy-oracle-deployer-dapp:0.0.1-scone-5.7.6-v15-debug"
-- checksum: "0x3a090590720baac37c21d5641b5c29e9981244f6d4e9a0f5a7761beff52b1115"
-- mrenclave.fingerprint: "4fd1222882036ac08c2f734b41fdfa3649e608836e8c4f742243a1ee9d9e9ae3"
+- checksum: "0xfb5f878941e46781d0e8e7c840c2984c64fceefeca4861a1987b6a65adba378d"
+- mrenclave.fingerprint: "0840b3373aff4d937dcc2d556bfb3a8f0d9afe9ebf4f5fc09e223da86122490d"
 - entrypoint: "node /app/src/deployer.js"
 
 deployed app
