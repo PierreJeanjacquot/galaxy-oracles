@@ -1,19 +1,27 @@
-const { ethers } = require('hardhat')
-const { expect } = require('chai')
+import { ethers } from 'hardhat'
+import { expect } from 'chai'
+import { GalaxyOracleVerifier, GalaxyOracleVerifier__factory } from '../typechain-types'
+import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
+import { Wallet } from 'ethers'
 
 describe('GalaxyOracleVerifier Test', function () {
-  let GalaxyOracleVerifierFactory, galaxyOracleVerifier, user
+  let GalaxyOracleVerifierFactory: GalaxyOracleVerifier__factory
+  let galaxyOracleVerifier: GalaxyOracleVerifier
+  let user: SignerWithAddress
+  let oracleSigner: Wallet
+
   const domainName = 'Galaxy Oracle'
   const domainVersion = '0.0.1'
-  const oracleSignerAddress = '0x7bd4783FDCAD405A28052a0d1f11236A741da593'
+  // const oracleSignerAddress = '0x7bd4783FDCAD405A28052a0d1f11236A741da593'
 
   before(async function () {
-    ;[user] = await ethers.getSigners()
+    user = (await ethers.getSigners())[0]
     GalaxyOracleVerifierFactory = await ethers.getContractFactory('GalaxyOracleVerifier')
   })
 
   beforeEach(async function () {
-    galaxyOracleVerifier = await GalaxyOracleVerifierFactory.deploy(oracleSignerAddress)
+    oracleSigner = Wallet.createRandom()
+    galaxyOracleVerifier = await GalaxyOracleVerifierFactory.deploy(oracleSigner.address)
     await galaxyOracleVerifier.deployed()
   })
 
@@ -35,7 +43,7 @@ describe('GalaxyOracleVerifier Test', function () {
     const signer = await galaxyOracleVerifier.oracleSigner()
 
     expect(domainSeparator).to.equal(expectedDomainSeparator)
-    expect(signer).to.equal(oracleSignerAddress)
+    expect(signer).to.equal(oracleSigner.address)
   })
 
   it('Should verify a valid signature', async function () {
@@ -46,25 +54,23 @@ describe('GalaxyOracleVerifier Test', function () {
       salt: '0x06417a7ce3dba043a0db74fe48a76ee2027d7ca24255b2524caa6b675c6a5f6d',
     }
 
-    const domain = {
-      name: domainName,
-      version: domainVersion,
-    }
+    const sign = await oracleSigner._signTypedData(
+      {
+        name: domainName,
+        version: domainVersion,
+      },
+      {
+        Payload: [
+          { name: 'timestamp', type: 'uint256' },
+          { name: 'payloadType', type: 'string' },
+          { name: 'value', type: 'bytes' },
+          { name: 'salt', type: 'bytes32' },
+        ],
+      },
+      payload,
+    )
 
-    const types = {
-      Payload: [
-        { name: 'timestamp', type: 'uint256' },
-        { name: 'payloadType', type: 'string' },
-        { name: 'value', type: 'bytes' },
-        { name: 'salt', type: 'bytes32' },
-      ],
-    }
-
-    // Use a hardcoded valid signature for testing since we can't sign with the real private key in the test
-    const validSignature =
-      '0x02b37fad56ccc1a2cf6ef041d128955796909e3de6298c0e083167db44b93341188351c3b1048332a7a51e98bfd920c28120d86e5897a02bad28ba9d0a1803db1b'
-
-    const isValid = await galaxyOracleVerifier.verifySignature(payload, validSignature)
+    const isValid = await galaxyOracleVerifier.verifySignature(payload, sign)
     expect(isValid).to.be.true
   })
 
@@ -98,27 +104,6 @@ describe('GalaxyOracleVerifier Test', function () {
   })
 
   it('Should correctly split a signature', async function () {
-    const payload = {
-      timestamp: 1717071393,
-      payloadType: 'number',
-      value: '0x333733382e3336',
-      salt: '0x06417a7ce3dba043a0db74fe48a76ee2027d7ca24255b2524caa6b675c6a5f6d',
-    }
-
-    const domain = {
-      name: domainName,
-      version: domainVersion,
-    }
-
-    const types = {
-      Payload: [
-        { name: 'timestamp', type: 'uint256' },
-        { name: 'payloadType', type: 'string' },
-        { name: 'value', type: 'bytes' },
-        { name: 'salt', type: 'bytes32' },
-      ],
-    }
-
     // Use a hardcoded valid signature for testing since we can't sign with the real private key in the test
     const validSignature =
       '0x02b37fad56ccc1a2cf6ef041d128955796909e3de6298c0e083167db44b93341188351c3b1048332a7a51e98bfd920c28120d86e5897a02bad28ba9d0a1803db1b'

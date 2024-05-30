@@ -10,7 +10,8 @@ contract GalaxyOracleVerifier {
         keccak256("Payload(uint256 timestamp,string payloadType,bytes value,bytes32 salt)");
 
     // Domain separator used to prevent signature replay across different domains
-    bytes32 public DOMAIN_SEPARATOR;
+    bytes32 public DOMAIN_SEPARATOR =
+        keccak256(abi.encode(EIP712DOMAIN_TYPEHASH, keccak256(bytes("Galaxy Oracle")), keccak256(bytes("0.0.1"))));
 
     // Address of the authorized Oracle signer
     address public oracleSigner;
@@ -26,16 +27,19 @@ contract GalaxyOracleVerifier {
     // Constructor to initialize the domain separator and Oracle signer
     constructor(address _oracleSigner) {
         oracleSigner = _oracleSigner;
-        DOMAIN_SEPARATOR = keccak256(
-            abi.encode(EIP712DOMAIN_TYPEHASH, keccak256(bytes("Galaxy Oracle")), keccak256(bytes("0.0.1")))
-        );
     }
 
     // Internal function to hash the payload using its structure
     function hashPayload(Payload memory payload) internal pure returns (bytes32) {
         return
             keccak256(
-                abi.encode(PAYLOAD_TYPEHASH, payload.timestamp, bytes(payload.payloadType), payload.value, payload.salt)
+                abi.encode(
+                    PAYLOAD_TYPEHASH,
+                    payload.timestamp,
+                    keccak256(bytes(payload.payloadType)),
+                    keccak256(payload.value),
+                    payload.salt
+                )
             );
     }
 
