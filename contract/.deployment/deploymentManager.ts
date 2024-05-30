@@ -3,6 +3,7 @@ import * as fs from 'fs'
 export enum DeploymentProperty {
   GalaxyOracleVerifier = 'GalaxyOracleVerifier',
   GalaxyOracleVerifierFactory = 'GalaxyOracleVerifierFactory',
+  Datafeed = 'Datafeed',
 }
 
 const loadJSON = (network: string) => {
