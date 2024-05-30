@@ -7,7 +7,7 @@ const { pushAppSecret } = require("./sms-utils");
 const { createVerifierContract } = require("./galaxy-oracles-contracts-utils");
 
 async function main() {
-  const { IEXEC_OUT } = process.env;
+  const { IEXEC_OUT, IEXEC_TASK_ID } = process.env;
 
   const oracleCid = process.argv[2];
   const targetOwner = process.argv[3];
@@ -49,7 +49,7 @@ async function main() {
     const signerWallet = Wallet.createRandom(); // secret wallet
 
     const app = {
-      name: `${oracleCid}-${signerWallet.address}`,
+      name: `${oracleCid}-${signerWallet.address}-${IEXEC_TASK_ID}`,
       type: "DOCKER",
       owner: deployerWallet.address,
       multiaddr:
