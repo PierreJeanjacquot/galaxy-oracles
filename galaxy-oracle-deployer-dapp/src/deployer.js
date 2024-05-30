@@ -4,6 +4,7 @@ const fetch = require("node-fetch");
 const { Wallet, utils } = require("ethers");
 const { deployApp, transferApp } = require("./iexec-contracts-utils");
 const { pushAppSecret } = require("./sms-utils");
+const { createVerifierContract } = require("./galaxy-oracles-contracts-utils");
 
 async function main() {
   const { IEXEC_OUT } = process.env;
@@ -93,11 +94,18 @@ async function main() {
       throw Error(`Failed to transfer app to new owner: ${e.toString()}`);
     });
 
+    const verifierDeployment = await createVerifierContract({
+      deployerWallet,
+      oracleSignerAddress: signerWallet.address,
+    });
+
     const deployed = JSON.stringify(
       {
-        deployTx: deployment.txHash,
-        transferTx: transfer.txHash,
         address: deployment.address,
+        deployAppTx: deployment.txHash,
+        transferAppTx: transfer.txHash,
+        createVerifierTx: verifierDeployment.txHash,
+        verifierContractAddress: verifierDeployment.address,
         oracleCid: oracleCid,
         deployer: deployment.deployer,
         signer: signerWallet.address,

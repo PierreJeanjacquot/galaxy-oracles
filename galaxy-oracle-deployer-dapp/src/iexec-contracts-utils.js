@@ -1,4 +1,3 @@
-// error when importing the full ethers package
 const { providers, Contract, utils } = require("ethers");
 
 const { getAddress, hexZeroPad } = utils;
