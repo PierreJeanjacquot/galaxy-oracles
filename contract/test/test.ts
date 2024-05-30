@@ -1,6 +1,6 @@
 import { ethers } from 'hardhat'
 import { expect } from 'chai'
-import { GalaxyOracleVerifier, GalaxyOracleVerifier__factory } from '../typechain-types'
+import { Datafeed, GalaxyOracleVerifier, GalaxyOracleVerifier__factory } from '../typechain-types'
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
 import { Wallet } from 'ethers'
 
@@ -9,6 +9,8 @@ describe('GalaxyOracleVerifier Test', function () {
   let galaxyOracleVerifier: GalaxyOracleVerifier
   let user: SignerWithAddress
   let oracleSigner: Wallet
+  let Datafeed: any
+  let datafeed: Datafeed
 
   const domainName = 'Galaxy Oracle'
   const domainVersion = '0.0.1'
@@ -17,12 +19,15 @@ describe('GalaxyOracleVerifier Test', function () {
   before(async function () {
     user = (await ethers.getSigners())[0]
     GalaxyOracleVerifierFactory = await ethers.getContractFactory('GalaxyOracleVerifier')
+    Datafeed = await ethers.getContractFactory('Datafeed')
   })
 
   beforeEach(async function () {
     oracleSigner = Wallet.createRandom()
     galaxyOracleVerifier = await GalaxyOracleVerifierFactory.deploy(oracleSigner.address)
     await galaxyOracleVerifier.deployed()
+    datafeed = await Datafeed.deploy(galaxyOracleVerifier.address)
+    await datafeed.deployed()
   })
 
   it('Should deploy with the correct domain separator and oracle signer', async function () {
@@ -114,5 +119,12 @@ describe('GalaxyOracleVerifier Test', function () {
     expect(splitResult[0]).to.equal(r)
     expect(splitResult[1]).to.equal(s)
     expect(splitResult[2]).to.equal(v)
+  })
+
+  // Datafeed test
+
+  it('Should deploy with the correct verifier contract address', async function () {
+    const verifierAddress = await datafeed.verifierContract()
+    expect(verifierAddress).to.equal(galaxyOracleVerifier.address)
   })
 })

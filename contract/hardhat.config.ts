@@ -132,7 +132,7 @@ const config: HardhatUserConfig = {
     alphaSort: true,
     disambiguatePaths: false,
     runOnCompile: true,
-    only: ['GalaxyOracleVerifier', 'GalaxyOracleVerifierFactory'],
+    only: ['GalaxyOracleVerifier', 'GalaxyOracleVerifierFactory', 'Datafeed'],
   },
 }
 export default config
