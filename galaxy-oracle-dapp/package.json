@@ -1,0 +1,14 @@
+{
+  "name": "galaxy-oracle-dapp",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "node src/oracle.js"
+  },
+  "author": "Pierre Jeanjacquot",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "node-fetch": "^2.7.0"
+  }
+}
