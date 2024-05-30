@@ -54,14 +54,14 @@ async function main() {
       multiaddr:
         "docker.io/pierreiexec/galaxy-oracle-dapp:0.0.1-scone-5.7.6-v15-debug",
       checksum:
-        "0x0e264fd15d5bc0e478873c1ae79110fb931f1fc6eb2976b1f7a6f29f59d24e56",
+        "0x45c5706c8bec1c23728fe15db32965539706b8488114d0293c2c5a25d094b0a5",
       mrenclave: {
         framework: "SCONE",
         version: "v5",
         entrypoint: "node /app/src/oracle.js",
         heapSize: 1073741824,
         fingerprint:
-          "21249ffc08c379a3c5f950fd009f51de3c10896ccdaa079291a270db6eac2d7f",
+          "ec9bfb70ea35451e94f4de8d092f2042a712721d3dbc3fa449c8d5d8bd38240e",
       },
     };
 

@@ -37,12 +37,12 @@ async function main() {
 
   let payload = {
     timestamp: Math.floor(Date.now() / 1000), // blockchain timestamp
-    type: typeof value,
+    payloadType: typeof value,
     value: "", // placeholder to be replaced
     salt: utils.hexlify(utils.randomBytes(32)),
   };
 
-  switch (payload.type) {
+  switch (payload.payloadType) {
     case "boolean":
       payload.value = value ? "0x01" : "0x00";
       break;
@@ -56,7 +56,7 @@ async function main() {
       payload.value = utils.hexlify(value);
       break;
     default:
-      throw Error(`Unsupported oracle value type ${payload.type}`);
+      throw Error(`Unsupported oracle value type ${payload.payloadType}`);
   }
 
   const domain = {
@@ -69,7 +69,7 @@ async function main() {
   const types = {
     [primaryType]: [
       { name: "timestamp", type: "uint256" },
-      { name: "type", type: "string" },
+      { name: "payloadType", type: "string" },
       { name: "value", type: "bytes" },
       { name: "salt", type: "bytes32" },
     ],

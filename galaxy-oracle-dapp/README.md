@@ -11,7 +11,7 @@ docker build . -t pierreiexec/galaxy-oracle-dapp:0.0.1
 ### test
 
 ```sh
-docker run -v $PWD/iexec_out:/iexec_out -e IEXEC_OUT=/iexec_out -e IEXEC_APP_DEVELOPER_SECRET='{"oracleCid":"QmUavzJrXy5TdykA6mZaH1eKQNtpfB8DQv1DTX17PJvwFW","signer":"0x564a9db84969c8159f7aa3d5393c5ecd014fce6a375842a45b12af6677b12407"}' --rm pierreiexec/galaxy-oracle-dapp:0.0.1
+docker run -v $PWD/iexec_out:/iexec_out -e IEXEC_OUT=/iexec_out -e IEXEC_APP_DEVELOPER_SECRET='{"oracleCid":"QmZaSDeni45cfqMc9V8VzJcKtPxp1LMGDysRQdN9wEjAJm","signer":"0x564a9db84969c8159f7aa3d5393c5ecd014fce6a375842a45b12af6677b12407"}' --rm pierreiexec/galaxy-oracle-dapp:0.0.1
 ```
 
 ### some example of oracleCid
@@ -32,7 +32,7 @@ sh sconify.sh
 ### test TEE
 
 ```sh
-docker run -v $PWD/iexec_out:/iexec_out -e IEXEC_OUT=/iexec_out -e IEXEC_APP_DEVELOPER_SECRET='{"oracleCid":"QmUavzJrXy5TdykA6mZaH1eKQNtpfB8DQv1DTX17PJvwFW","signer":"0x564a9db84969c8159f7aa3d5393c5ecd014fce6a375842a45b12af6677b12407"}' --rm pierreiexec/galaxy-oracle-dapp:0.0.1
+docker run -v $PWD/iexec_out:/iexec_out -e IEXEC_OUT=/iexec_out -e IEXEC_APP_DEVELOPER_SECRET='{"oracleCid":"QmZaSDeni45cfqMc9V8VzJcKtPxp1LMGDysRQdN9wEjAJm","signer":"0x564a9db84969c8159f7aa3d5393c5ecd014fce6a375842a45b12af6677b12407"}' --rm pierreiexec/galaxy-oracle-dapp:0.0.1
 ```
 
 ## deployed
@@ -40,10 +40,10 @@ docker run -v $PWD/iexec_out:/iexec_out -e IEXEC_OUT=/iexec_out -e IEXEC_APP_DEV
 docker
 
 - image: "pierreiexec/galaxy-oracle-dapp:0.0.1-scone-5.7.6-v15-debug"
-- checksum: "0x0e264fd15d5bc0e478873c1ae79110fb931f1fc6eb2976b1f7a6f29f59d24e56"
-- mrenclave.fingerprint: "21249ffc08c379a3c5f950fd009f51de3c10896ccdaa079291a270db6eac2d7f"
+- checksum: "0x45c5706c8bec1c23728fe15db32965539706b8488114d0293c2c5a25d094b0a5"
+- mrenclave.fingerprint: "ec9bfb70ea35451e94f4de8d092f2042a712721d3dbc3fa449c8d5d8bd38240e"
 - entrypoint: "node /app/src/oracle.js"
 
 deployed apps
 
-- app: 0x26c0e4bb2f52c6650f07ea16f0022bbe2c0938c9
+- app:
