@@ -100,6 +100,14 @@ const config: HardhatUserConfig = {
         },
       },
       {
+        network: 'bellecour',
+        chainId: 134,
+        urls: {
+          apiURL: 'https://blockscout-v6.bellecour.iex.ec/api',
+          browserURL: 'https://blockscout-v6.bellecour.iex.ec',
+        },
+      },
+      {
         network: 'gnosis',
         chainId: 100,
         urls: {
@@ -112,19 +120,12 @@ const config: HardhatUserConfig = {
           //browserURL: "https://blockscout.com/xdai/mainnet",
         },
       },
-      {
-        network: 'iExec',
-        chainId: 5001,
-        urls: {
-          apiURL: 'https://explorer.testnet.mantle.xyz/api',
-          browserURL: 'https://explorer.testnet.mantle.xyz',
-        },
-      },
     ],
     apiKey: {
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || '',
       polygon: process.env.POLYGONSCAN_API_KEY || '',
       sepolia: process.env.SEPOLIA_API_KEY || '',
+      bellecour: 'abc',
     },
   },
   contractSizer: {
