@@ -4,6 +4,7 @@ import { config } from "./wagmiConfig";
 import ConnectButton from "./ConnectButton";
 import IExecAccountWidget from "./IExecAccountWidget";
 import RunHelloWorld from "./RunHelloWorld";
+import CreateOracle from "./CreateOracle";
 
 const queryClient = new QueryClient();
 
@@ -24,14 +25,14 @@ function App() {
               padding: "0 3rem",
             }}
           >
-            <h1>iExec hello world</h1>
+            <h1>Galaxy oracles</h1>
             <div style={{ margin: "auto 0 auto auto" }}>
               <ConnectButton />
             </div>
           </div>
           <div style={{ padding: "1rem 3rem", display: "grid", gap: "1rem" }}>
             <IExecAccountWidget />
-            <RunHelloWorld />
+            <CreateOracle />
           </div>
         </div>
       </QueryClientProvider>
