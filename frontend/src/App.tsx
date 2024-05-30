@@ -3,7 +3,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { config } from "./wagmiConfig";
 import ConnectButton from "./ConnectButton";
 import IExecAccountWidget from "./IExecAccountWidget";
-import RunHelloWorld from "./RunHelloWorld";
 import CreateOracle from "./CreateOracle";
 
 const queryClient = new QueryClient();
