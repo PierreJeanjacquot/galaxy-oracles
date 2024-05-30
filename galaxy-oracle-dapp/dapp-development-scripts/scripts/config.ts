@@ -25,4 +25,6 @@ export const iexec = new IExec(
 
 export const workerpool = defaultWorkerpool;
 
-export const app = "0xd4CA56e248CEB2f5DA05ED6dbE8625A87D3c60f6";
+// export const app = "0xd4CA56e248CEB2f5DA05ED6dbE8625A87D3c60f6";
+// export const app = "0x301f045be906860b8273e4a97bd621d504e92926";
+export const app = "0x26c0e4bb2F52C6650F07eA16F0022Bbe2c0938c9";

@@ -21,10 +21,10 @@ const app = {
     entrypoint: "node /app/src/oracle.js",
     heapSize: 1073741824,
     fingerprint:
-      "46d1fda755e003c5232d5f3d8e577c06f2b283ad36fd2e35d234e08b8ca905da", // scone fingerprint (from `docker run --rm -e SCONE_HASH=1 <app-image>`)
+      "21249ffc08c379a3c5f950fd009f51de3c10896ccdaa079291a270db6eac2d7f", // scone fingerprint (from `docker run --rm -e SCONE_HASH=1 <app-image>`)
   },
   checksum:
-    "0x06518c7dbcf39287725a373e857674934e69577966caf6971e8829dea27c1158", // docker image digest (from `docker pull <app-image> | grep "Digest: sha256:" | sed 's/.*sha256:/0x/'`)
+    "0x0e264fd15d5bc0e478873c1ae79110fb931f1fc6eb2976b1f7a6f29f59d24e56", // docker image digest (from `docker pull <app-image> | grep "Digest: sha256:" | sed 's/.*sha256:/0x/'`)
 };
 
 console.log(`Deploying app: ${JSON.stringify(app, null, 2)}`);

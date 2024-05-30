@@ -90,7 +90,7 @@ async function main() {
     JSON.stringify(
       {
         oracleCid,
-        value: typeof value === "bigint" ? value.toString() + "n" : value,
+        value: typeof value === "bigint" ? `${value}n` : value,
         proof: {
           domain,
           payload,
