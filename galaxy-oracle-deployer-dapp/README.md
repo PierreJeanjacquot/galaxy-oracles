@@ -46,6 +46,6 @@ docker
 - mrenclave.fingerprint: "4fd1222882036ac08c2f734b41fdfa3649e608836e8c4f742243a1ee9d9e9ae3"
 - entrypoint: "node /app/src/deployer.js"
 
-deployed apps
+deployed app
 
-- app:
+- app: [galaxy-oracle-deployer.apps.iexec.eth](https://explorer.iex.ec/bellecour/search/galaxy-oracle-deployer.apps.iexec.eth)
