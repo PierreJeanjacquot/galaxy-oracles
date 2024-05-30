@@ -18,7 +18,7 @@ async function main() {
 
   console.log(`loading oracle code from ${oracleCid}`);
   // fetch oracle code
-  const code = await fetch(`http://ipfs.io/ipfs/${oracleCid}`).then((res) =>
+  const code = await fetch(`http://ipfs.iex.ec/ipfs/${oracleCid}`).then((res) =>
     res.text()
   );
 
