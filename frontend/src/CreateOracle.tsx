@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import useIExec from "./useIExec";
 import { useAccount } from "wagmi";
+
+import useIExec from "./useIExec";
+import { add } from "./services/ipfs";
+import JSZip from "jszip";
 
 function CreateOracle() {
   const { address } = useAccount();
@@ -8,25 +11,36 @@ function CreateOracle() {
 
   const [oracleCode, setOracleCode] = useState("(() => 42)();");
 
-  const [isRunning, setIsRunning] = useState(false);
+  const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const [dealid, setDealid] = useState<string | undefined>();
   const [taskid, setTaskid] = useState<string | undefined>();
-  const [taskStatus, setTaskStatus] = useState<string | undefined>();
   const [taskCompleted, setTaskCompleted] = useState(false);
+  const [taskFailed, setTaskFailed] = useState(false);
 
-  const disabled = !isConnected || isRunning;
+  const [taskStatus, setTaskStatus] = useState<string | undefined>();
+  const [deploymentError, setDeploymentError] = useState<string | undefined>();
+  const [deployedAddress, setDeployedAddress] = useState<string | undefined>();
+
+  const taskRunning = !!taskid && !taskFailed && !taskCompleted;
+  const disabled = !isConnected || isCreatingTask || taskRunning;
 
   const onclickRun = async () => {
     if (!disabled && iexec) {
       try {
-        setIsRunning(true);
+        setIsCreatingTask(true);
         setDealid(undefined);
         setTaskid(undefined);
+        setTaskCompleted(false);
+        setTaskFailed(false);
+        setDeploymentError(undefined);
+        setDeployedAddress(undefined);
 
         setStatusMessage("Uploading code");
 
-        const oracleCid = "QmZaSDeni45cfqMc9V8VzJcKtPxp1LMGDysRQdN9wEjAJm"; // todo upload to pinata (yolo api key)
+        await add(oracleCode);
+
+        const oracleCid = await add(oracleCode);
 
         setStatusMessage("Fetching orders");
 
@@ -84,7 +98,7 @@ function CreateOracle() {
       } catch (e) {
         console.error(e);
       }
-      setIsRunning(false);
+      setIsCreatingTask(false);
       setStatusMessage("");
     }
   };
@@ -115,11 +129,42 @@ function CreateOracle() {
 
   useEffect(() => {
     if (iexec && taskid && dealid) {
+      let abort = false;
       let abortTaskObservableSubscription: (() => void) | undefined;
       iexec.task.obsTask(taskid, { dealid }).then((taskObservable) => {
         abortTaskObservableSubscription = taskObservable.subscribe({
           complete: () => {
             setTaskCompleted(true);
+            // fetch
+            iexec.task
+              .fetchResults(taskid)
+              .then((res) => res.arrayBuffer())
+              .then((buffer) => new JSZip().loadAsync(buffer))
+              .then((zip) => {
+                const deployedJsonFile = zip.file("deployed.json");
+                if (deployedJsonFile) {
+                  deployedJsonFile.async("string").then((deployedJson) => {
+                    console.log("deployedJson", deployedJson);
+                    const deployed = JSON.parse(deployedJson);
+                    if (deployed.error) {
+                      throw Error(
+                        `An error occurred in the deployer app: ${deployed.error}`
+                      );
+                    }
+                    if (deployed.address && !abort) {
+                      setDeployedAddress(deployed.address);
+                    }
+                  });
+                } else {
+                  throw Error("No deployed.json in task result");
+                }
+              })
+              .catch((e) => {
+                console.error(e);
+                if (!abort) {
+                  setDeploymentError(`Something went wrong: ${e.message}`);
+                }
+              });
           },
           next: ({ task }) => setTaskStatus(task.statusName.toLowerCase()),
           error: (e) => {
@@ -132,6 +177,7 @@ function CreateOracle() {
         if (abortTaskObservableSubscription) {
           abortTaskObservableSubscription();
         }
+        abort = true;
       };
     } else {
       setTaskCompleted(false);
@@ -143,18 +189,25 @@ function CreateOracle() {
     <div>
       <h2>Deploy your oracle</h2>
       <p>
-        <input
-          type="text-area"
-          value={oracleCode}
-          onChange={(e) => setOracleCode(e.target.value)}
-        ></input>
+        <label htmlFor="oracleCode">oracle code</label>
+        <div>
+          <textarea
+            id="oracleCode"
+            onChange={(e) => setOracleCode(e.target.value)}
+            disabled={disabled}
+          >
+            {oracleCode}
+          </textarea>
+        </div>
       </p>
       <button disabled={disabled} onClick={onclickRun}>
-        {isRunning && statusMessage ? statusMessage : "Deploy oracle"}
+        {isCreatingTask && statusMessage ? statusMessage : "Deploy oracle"}
       </button>
-      <p>{taskid && `Task running ${taskid} ${taskStatus}`}</p>
+      <p>{taskid && `Deployment task running ${taskid} ${taskStatus}`}</p>
+      <p>{deploymentError}</p>
+      <p>{deployedAddress && `Oracle app deployed at ${deployedAddress} 🎉`}</p>
       {taskid && taskCompleted && (
-        <button onClick={onClickDownload}>Download result</button>
+        <button onClick={onClickDownload}>Download deployment report</button>
       )}
     </div>
   );
