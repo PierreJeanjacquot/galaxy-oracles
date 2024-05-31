@@ -10,7 +10,7 @@ function AppChecksum() {
 
   return (
     <div>
-      <h1>AppChecksum</h1>
+      <h1>App get by Checksum</h1>
       {apps.length > 0 ? (
         <ul>
           {apps.map(app => (
