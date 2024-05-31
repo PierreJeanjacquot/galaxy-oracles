@@ -12,7 +12,7 @@ function HomeMenu() {
         <div className="flex items-center justify-between">
           <div className="block py-4 lg:py-0">
             <a href="/" className="block max-w-[145px] sm:max-w-[180px]">
-              <Logo className="text-yellow-400" width={200} height={60} />
+              <Logo className="text-yellow-400" width={50} height={50} />
               <h1>Galaxy oracles</h1>
             </a>
           </div>
@@ -50,9 +50,9 @@ function HomeMenu() {
                     variant="link"
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
-                    <Link onClick={() => setIsOpen(false)} href="#donations">
+                    <a onClick={() => setIsOpen(false)} href="#donations">
                       xx
-                    </Link>
+                    </a>
                   </Button>
                 </li>
                 <li className="menu-item">
@@ -61,9 +61,9 @@ function HomeMenu() {
                     variant="link"
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
-                    <Link onClick={() => setIsOpen(false)} href="#events">
+                    <a onClick={() => setIsOpen(false)} href="#events">
                       xx
-                    </Link>
+                    </a>
                   </Button>
                 </li>
                 <li className="menu-item">
@@ -72,9 +72,9 @@ function HomeMenu() {
                     variant="link"
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
-                    <Link onClick={() => setIsOpen(false)} href="#features">
+                    <a onClick={() => setIsOpen(false)} href="#features">
                       xx
-                    </Link>
+                    </a>
                   </Button>
                 </li>
                 <li className="menu-item">
@@ -83,9 +83,9 @@ function HomeMenu() {
                     variant="link"
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
-                    <Link onClick={() => setIsOpen(false)} href="#team">
+                    <a onClick={() => setIsOpen(false)} href="#team">
                       xx
-                    </Link>
+                    </a>
                   </Button>
                 </li>
               </ul>
