@@ -13,6 +13,9 @@ function App() {
         height: "100vh",
       }}
     >
+      <h1 className="text-3xl text-red-800 font-bold underline">
+        Hello world!
+      </h1>
       <NavBar />
       <div style={{ padding: "1rem 3rem", display: "grid", gap: "1rem" }}>
         <IExecAccountWidget />
