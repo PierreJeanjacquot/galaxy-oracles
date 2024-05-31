@@ -113,8 +113,8 @@ function CreateOracle() {
     if (taskid && taskCompleted && iexec) {
       iexec.task
         .fetchResults(taskid)
-        .then((res) => res.blob())
-        .then((blob) => {
+        .then(res => res.blob())
+        .then(blob => {
           // download blob
           const blobUrl = URL.createObjectURL(blob);
           const link = document.createElement("a");
@@ -141,19 +141,19 @@ function CreateOracle() {
     if (iexec && taskid && dealid) {
       let abort = false;
       let abortTaskObservableSubscription: (() => void) | undefined;
-      iexec.task.obsTask(taskid, { dealid }).then((taskObservable) => {
+      iexec.task.obsTask(taskid, { dealid }).then(taskObservable => {
         abortTaskObservableSubscription = taskObservable.subscribe({
           complete: () => {
             setTaskCompleted(true);
             // fetch
             iexec.task
               .fetchResults(taskid)
-              .then((res) => res.arrayBuffer())
-              .then((buffer) => new JSZip().loadAsync(buffer))
-              .then((zip) => {
+              .then(res => res.arrayBuffer())
+              .then(buffer => new JSZip().loadAsync(buffer))
+              .then(zip => {
                 const deployedJsonFile = zip.file("deployed.json");
                 if (deployedJsonFile) {
-                  deployedJsonFile.async("string").then((deployedJson) => {
+                  deployedJsonFile.async("string").then(deployedJson => {
                     console.log("deployedJson", deployedJson);
                     const deployed = JSON.parse(deployedJson);
                     if (deployed.error) {
@@ -169,7 +169,7 @@ function CreateOracle() {
                   throw Error("No deployed.json in task result");
                 }
               })
-              .catch((e) => {
+              .catch(e => {
                 console.error(e);
                 if (!abort) {
                   setDeploymentError(`Something went wrong: ${e.message}`);
@@ -177,7 +177,7 @@ function CreateOracle() {
               });
           },
           next: ({ task }) => setTaskStatus(task.statusName.toLowerCase()),
-          error: (e) => {
+          error: e => {
             console.error(e);
           },
         });
@@ -196,30 +196,52 @@ function CreateOracle() {
   }, [iexec, taskid, dealid]);
 
   return (
-    <div>
-      <h2>Deploy your oracle</h2>
-      <p>
-        <label htmlFor="oracleCode">oracle code</label>
-        <div>
+    <div className="max-w-lg mx-auto p-4 bg-white shadow-md rounded-lg">
+      <h2 className="text-xl font-bold mb-4">Deploy your oracle</h2>
+      <div className="mb-4">
+        <label
+          htmlFor="oracleCode"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Oracle Code
+        </label>
+        <div className="mt-1">
           <textarea
             id="oracleCode"
-            onChange={(e) => setOracleCode(e.target.value)}
+            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+            rows={5}
+            value={oracleCode}
+            onChange={e => setOracleCode(e.target.value)}
             disabled={disabled}
-          >
-            {oracleCode}
-          </textarea>
+          ></textarea>
         </div>
-      </p>
-      <Button disabled={disabled} onClick={onclickRun}>
-        {isCreatingTask && statusMessage ? statusMessage : "Deploy oracle"}
+      </div>
+      <Button className="w-full mb-4" disabled={disabled} onClick={onclickRun}>
+        {isCreatingTask && statusMessage ? statusMessage : "Deploy Oracle"}
       </Button>
-      <p>{taskid && `Deployment task running ${taskid} ${taskStatus}`}</p>
-      <p>{deploymentError}</p>
-      <p>{deployedAddress && `Oracle app deployed at ${deployedAddress} 🎉`}</p>
-      {taskid && taskCompleted && (
-        <Button onClick={onClickDownload}>Download deployment report</Button>
+      {taskid && (
+        <p className="text-sm text-gray-500 mb-4">
+          Deployment task running: {taskid} {taskStatus}
+        </p>
       )}
-      {deployedAddress && <Button onClick={onClickNext}>Next</Button>}
+      {deploymentError && (
+        <p className="text-sm text-red-500 mb-4">{deploymentError}</p>
+      )}
+      {deployedAddress && (
+        <p className="text-sm text-green-500 mb-4">
+          Oracle app deployed at: {deployedAddress} 🎉
+        </p>
+      )}
+      {taskid && taskCompleted && (
+        <Button className="w-full mb-4" onClick={onClickDownload}>
+          Download Deployment Report
+        </Button>
+      )}
+      {deployedAddress && (
+        <Button className="w-full" onClick={onClickNext}>
+          Next
+        </Button>
+      )}
     </div>
   );
 }
