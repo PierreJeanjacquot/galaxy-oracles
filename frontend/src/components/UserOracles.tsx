@@ -2,7 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { useAccount } from "wagmi";
 import useOraclesList from "../hooks/useOraclesList";
 import { parseOracleName } from "../utils/oracle-name-helper";
-import { Card, CardHeader, CardTitle, CardContent } from "./ui/card";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "./ui/card";
+import { Button } from "./ui/button";
 
 function UserOracles() {
   const { address } = useAccount();
@@ -11,6 +18,10 @@ function UserOracles() {
   const navigate = useNavigate();
 
   const createOracleLink = (address: string) => () => {
+    navigate(`/oracle/${address}`);
+  };
+
+  const createManageOracleLink = (address: string) => () => {
     navigate(`/myoracles/${address}`);
   };
 
@@ -32,7 +43,7 @@ function UserOracles() {
           {oracles.map((oracle) => {
             const { oracleCid, oracleSigner } = parseOracleName(oracle.name);
             return (
-              <Card key={oracle.id} onClick={createOracleLink(oracle.id)}>
+              <Card key={oracle.id}>
                 <CardHeader>
                   <CardTitle>{oracle.id}</CardTitle>
                 </CardHeader>
@@ -41,6 +52,12 @@ function UserOracles() {
                   <p>code: {oracleCid}</p>
                   <p>signer: {oracleSigner}</p>
                 </CardContent>
+                <CardFooter>
+                  <Button onClick={createOracleLink(oracle.id)}>Show</Button>
+                  <Button onClick={createManageOracleLink(oracle.id)}>
+                    Manage
+                  </Button>
+                </CardFooter>
               </Card>
             );
           })}

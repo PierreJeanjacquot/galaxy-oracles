@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAccount } from "wagmi";
 
 import useIExec from "../hooks/useIExec";
@@ -9,6 +10,7 @@ import { Button } from "./ui/button";
 function CreateOracle() {
   const { address } = useAccount();
   const { isConnected, iexec } = useIExec();
+  const navigate = useNavigate();
 
   const [oracleCode, setOracleCode] = useState("(() => 42)();");
 
@@ -128,6 +130,10 @@ function CreateOracle() {
     }
   };
 
+  const onClickNext = () => {
+    navigate(`/myoracles/${deployedAddress}`);
+  };
+
   useEffect(() => {
     if (iexec && taskid && dealid) {
       let abort = false;
@@ -210,6 +216,7 @@ function CreateOracle() {
       {taskid && taskCompleted && (
         <Button onClick={onClickDownload}>Download deployment report</Button>
       )}
+      {deployedAddress && <Button onClick={onClickNext}>Next</Button>}
     </div>
   );
 }
