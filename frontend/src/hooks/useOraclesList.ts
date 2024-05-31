@@ -3,7 +3,7 @@ import { getAppsByChecksum } from "../queries/appsByChecksum";
 import { ORACLE_APP_CHECKSUM } from "../utils/config";
 import { SubgraphOracleData } from "../types/types";
 
-const useOraclesList = () => {
+const useOraclesList = ({ owner }: { owner?: string } = {}) => {
   const [oracles, setOracles] = useState<SubgraphOracleData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -12,8 +12,7 @@ const useOraclesList = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getAppsByChecksum(ORACLE_APP_CHECKSUM);
-        console.log("data", data);
+        const data = await getAppsByChecksum(ORACLE_APP_CHECKSUM, owner);
         setOracles(data.apps);
       } catch (err) {
         setError(err as Error);
@@ -23,7 +22,7 @@ const useOraclesList = () => {
     };
 
     fetchData();
-  }, [ORACLE_APP_CHECKSUM]);
+  }, [owner]);
 
   return { oracles, loading, error };
 };

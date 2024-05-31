@@ -1,4 +1,4 @@
 function ManagePage() {
-  return <>TODO</>;
+  return <>TODO SET ORACLE PRICE</>;
 }
 export default ManagePage;
