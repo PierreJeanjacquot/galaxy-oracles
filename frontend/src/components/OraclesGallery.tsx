@@ -4,6 +4,8 @@ import { parseOracleName } from "../utils/oracle-name-helper";
 function OraclesGallery() {
   const { oracles, loading, error } = useOraclesList();
 
+  console.log("loading", loading);
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -19,7 +21,7 @@ function OraclesGallery() {
             gap: "1rem",
           }}
         >
-          {oracles.map((oracle) => {
+          {oracles.map(oracle => {
             const { oracleCid, oracleSigner } = parseOracleName(oracle.name);
             return (
               <div key={oracle.id}>

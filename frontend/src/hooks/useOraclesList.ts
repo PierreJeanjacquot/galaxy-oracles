@@ -23,7 +23,7 @@ const useOraclesList = () => {
     };
 
     fetchData();
-  });
+  }, [ORACLE_APP_CHECKSUM]);
 
   return { oracles, loading, error };
 };
