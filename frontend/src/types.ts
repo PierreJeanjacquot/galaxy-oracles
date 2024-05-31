@@ -18,3 +18,12 @@ export type OracleResult = {
   proof: OracleProof;
   signer: string;
 };
+
+export type SubgraphOracleData = {
+  id: string;
+  name: string;
+  owner: {
+    id: string;
+  };
+  timestamp: string;
+};
