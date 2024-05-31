@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { Eip1193Provider, IExec } from "iexec";
-import { bellecour } from "./wagmiConfig";
+import { bellecour } from "../wagmiConfig";
 
 // read only IExec instance provided when the user account is not connected
 const readOnlyIexec = new IExec({ ethProvider: bellecour.id });

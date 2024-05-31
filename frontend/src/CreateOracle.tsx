@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
-import useIExec from "./useIExec";
+import useIExec from "./hooks/useIExec";
 import { add } from "./services/ipfs";
 import JSZip from "jszip";
 

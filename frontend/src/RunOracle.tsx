@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import useIExec from "./useIExec";
+import useIExec from "./hooks/useIExec";
 import { OracleProof } from "./types";
 import { getOracleProofFromTask } from "./services/oracle-proof";
 

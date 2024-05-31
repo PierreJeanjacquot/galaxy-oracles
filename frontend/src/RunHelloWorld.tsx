@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useIExec from "./useIExec";
+import useIExec from "./hooks/useIExec";
 
 function RunHelloWorld() {
   const { isConnected, iexec } = useIExec();
