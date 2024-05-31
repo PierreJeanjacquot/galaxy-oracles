@@ -81,7 +81,7 @@ function HomeMenu() {
                     variant="link"
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
-                    <Link to="#team">Contact</Link>
+                    <Link to="/contact">Contact</Link>
                   </Button>
                 </li>
               </ul>

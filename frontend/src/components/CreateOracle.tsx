@@ -222,7 +222,7 @@ function CreateOracle() {
         {isCreatingTask && statusMessage ? statusMessage : "Deploy Oracle"}
       </Button>
       {taskid && (
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-500 mb-4 truncate">
           Deployment task running: {taskid} {taskStatus}
         </p>
       )}
