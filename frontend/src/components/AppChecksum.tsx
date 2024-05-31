@@ -1,12 +1,27 @@
 import useAppByChecksum from "../hooks/useAppByChecksum";
 
 function AppChecksum() {
-  const app = useAppByChecksum(
-    "0x45c5706c8bec1c23728fe15db32965539706b8488114d0293c2c5a25d094b0a5"
+  const { apps, loading, error } = useAppByChecksum(
+    "0x1d7060abb1baebac2f389d40afbc39a956b66371615e5f4efa1ef683f84da7ff"
   );
-  console.log("app", app);
 
-  return <div>AppChecksum</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  return (
+    <div>
+      <h1>AppChecksum</h1>
+      {apps.length > 0 ? (
+        <ul>
+          {apps.map(app => (
+            <li key={app.id}>{app.id}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>No apps found for the provided checksum.</p>
+      )}
+    </div>
+  );
 }
 
 export default AppChecksum;
