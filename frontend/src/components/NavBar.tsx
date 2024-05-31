@@ -9,7 +9,7 @@ function NavBar() {
         padding: "0 3rem",
       }}
     >
-      <h1>Galaxy oracles</h1>
+      <h1 className="text-red-800">Galaxy oracles</h1>
       <div style={{ margin: "auto 0 auto auto" }}>
         <ConnectButton />
       </div>
