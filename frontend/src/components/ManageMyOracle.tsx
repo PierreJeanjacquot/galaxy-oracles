@@ -4,19 +4,9 @@ import useIExec from "../hooks/useIExec";
 import { OracleProof } from "../types/types";
 import { getOracleProofFromTask } from "../services/oracle-proof";
 import { Button } from "./ui/button";
-import useOracleData from "@/hooks/useOracleData";
-import { parseOracleName } from "@/utils/oracle-name-helper";
 
-function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
+function ManageMyOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   const { isConnected, iexec } = useIExec();
-
-  const { oracle, oracleCode } = useOracleData(oracleAppAddress, {
-    loadCode: true,
-  });
-
-  const { oracleSigner, deployTaskid, oracleCid } = parseOracleName(
-    oracle?.name || "Loading-Loading-Loading"
-  );
 
   const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
@@ -168,12 +158,8 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   return (
     <div>
       <h2>Run oracle {oracleAppAddress}</h2>
-      <div>oracle cid: {oracleCid}</div>
-      <div>oracle code: {oracleCode}</div>
       <Button disabled={disabled} onClick={onclickRun}>
-        {isCreatingTask && statusMessage
-          ? statusMessage
-          : "Run oracle on iExec"}
+        {isCreatingTask && statusMessage ? statusMessage : "Run oracle"}
       </Button>
       <p>{taskid && `Oracle task running ${taskid} ${taskStatus}`}</p>
       <p>{oracleRunError}</p>
@@ -190,4 +176,4 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   );
 }
 
-export default RunOracle;
+export default ManageMyOracle;
