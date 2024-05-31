@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import useOracleData from "@/hooks/useOracleData";
 import { parseOracleName } from "@/utils/oracle-name-helper";
 import { TARGET_WORKERPOOL } from "@/utils/config";
+import CodeBlock from "./ui/CodeBlock";
 
 function ManageMyOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   const { isConnected, iexec } = useIExec();
@@ -73,7 +74,9 @@ function ManageMyOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
             </tr>
             <tr>
               <td className="px-4 py-2 border-b font-bold">Oracle Code</td>
-              <td className="px-4 py-2 border-b">{oracleCode}</td>
+              <td className="px-4 py-2 border-b">
+                {oracleCode && <CodeBlock code={oracleCode}></CodeBlock>}
+              </td>
             </tr>
             <tr>
               <td className="px-4 py-2 border-b font-bold">Oracle Signer</td>
@@ -96,7 +99,7 @@ function ManageMyOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
           <input
             className="border border-gray-300 rounded p-2 mr-2"
             value={newPrice}
-            onChange={e => setNewPrice(e.target.value)}
+            onChange={(e) => setNewPrice(e.target.value)}
           />
           <Button
             disabled={!newPrice || !isConnected}
