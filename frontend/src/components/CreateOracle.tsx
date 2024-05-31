@@ -7,6 +7,7 @@ import { add } from "../services/ipfs";
 import JSZip from "jszip";
 import { Button } from "./ui/button";
 import { TARGET_WORKERPOOL } from "@/utils/config";
+import CodeBlock from "./ui/CodeBlock";
 
 function CreateOracle() {
   const { address } = useAccount();
@@ -113,8 +114,8 @@ function CreateOracle() {
     if (taskid && taskCompleted && iexec) {
       iexec.task
         .fetchResults(taskid)
-        .then(res => res.blob())
-        .then(blob => {
+        .then((res) => res.blob())
+        .then((blob) => {
           // download blob
           const blobUrl = URL.createObjectURL(blob);
           const link = document.createElement("a");
@@ -141,19 +142,19 @@ function CreateOracle() {
     if (iexec && taskid && dealid) {
       let abort = false;
       let abortTaskObservableSubscription: (() => void) | undefined;
-      iexec.task.obsTask(taskid, { dealid }).then(taskObservable => {
+      iexec.task.obsTask(taskid, { dealid }).then((taskObservable) => {
         abortTaskObservableSubscription = taskObservable.subscribe({
           complete: () => {
             setTaskCompleted(true);
             // fetch
             iexec.task
               .fetchResults(taskid)
-              .then(res => res.arrayBuffer())
-              .then(buffer => new JSZip().loadAsync(buffer))
-              .then(zip => {
+              .then((res) => res.arrayBuffer())
+              .then((buffer) => new JSZip().loadAsync(buffer))
+              .then((zip) => {
                 const deployedJsonFile = zip.file("deployed.json");
                 if (deployedJsonFile) {
-                  deployedJsonFile.async("string").then(deployedJson => {
+                  deployedJsonFile.async("string").then((deployedJson) => {
                     console.log("deployedJson", deployedJson);
                     const deployed = JSON.parse(deployedJson);
                     if (deployed.error) {
@@ -169,7 +170,7 @@ function CreateOracle() {
                   throw Error("No deployed.json in task result");
                 }
               })
-              .catch(e => {
+              .catch((e) => {
                 console.error(e);
                 if (!abort) {
                   setDeploymentError(`Something went wrong: ${e.message}`);
@@ -177,7 +178,7 @@ function CreateOracle() {
               });
           },
           next: ({ task }) => setTaskStatus(task.statusName.toLowerCase()),
-          error: e => {
+          error: (e) => {
             console.error(e);
           },
         });
@@ -211,9 +212,10 @@ function CreateOracle() {
             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
             rows={5}
             value={oracleCode}
-            onChange={e => setOracleCode(e.target.value)}
+            onChange={(e) => setOracleCode(e.target.value)}
             disabled={disabled}
           ></textarea>
+          <CodeBlock code={oracleCode}></CodeBlock>
         </div>
       </div>
       <Button className="w-full mb-4" disabled={disabled} onClick={onclickRun}>

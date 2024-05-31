@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import useOracleData from "@/hooks/useOracleData";
 import { parseOracleName } from "@/utils/oracle-name-helper";
 import { TARGET_WORKERPOOL } from "@/utils/config";
+import CodeBlock from "./ui/CodeBlock";
 
 function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   const { isConnected, iexec } = useIExec();
@@ -188,7 +189,9 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
             </tr>
             <tr>
               <td className="px-4 py-2 border-b font-bold">Oracle Code</td>
-              <td className="px-4 py-2 border-b">{oracleCode}</td>
+              <td className="px-4 py-2 border-b">
+                {oracleCode && <CodeBlock code={oracleCode}></CodeBlock>}
+              </td>
             </tr>
             <tr>
               <td className="px-4 py-2 border-b font-bold">Oracle Signer</td>
