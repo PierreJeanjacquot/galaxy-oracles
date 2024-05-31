@@ -19,6 +19,8 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
     oracle?.name || "Loading-Loading-Loading"
   );
 
+  console.log(oracleSigner, deployTaskid, oracleCid);
+
   const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const [dealid, setDealid] = useState<string | undefined>();
@@ -105,8 +107,8 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
     if (taskid && taskCompleted && iexec) {
       iexec.task
         .fetchResults(taskid)
-        .then((res) => res.blob())
-        .then((blob) => {
+        .then(res => res.blob())
+        .then(blob => {
           // download blob
           const blobUrl = URL.createObjectURL(blob);
           const link = document.createElement("a");
@@ -129,18 +131,18 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
     if (iexec && taskid && dealid) {
       let abort = false;
       let abortTaskObservableSubscription: (() => void) | undefined;
-      iexec.task.obsTask(taskid, { dealid }).then((taskObservable) => {
+      iexec.task.obsTask(taskid, { dealid }).then(taskObservable => {
         abortTaskObservableSubscription = taskObservable.subscribe({
           complete: () => {
             setTaskCompleted(true);
             // fetch
             getOracleProofFromTask(taskid)
-              .then((oracleProof) => {
+              .then(oracleProof => {
                 if (!abort) {
                   setProof(oracleProof);
                 }
               })
-              .catch((e) => {
+              .catch(e => {
                 console.error(e);
                 if (!abort) {
                   setOracleRunError(`Something went wrong: ${e.message}`);
@@ -148,7 +150,7 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
               });
           },
           next: ({ task }) => setTaskStatus(task.statusName.toLowerCase()),
-          error: (e) => {
+          error: e => {
             console.error(e);
           },
         });

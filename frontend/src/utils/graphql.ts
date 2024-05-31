@@ -1,10 +1,5 @@
 /* eslint-disable no-console */
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  gql,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 // Initialize Apollo Client
 const client = new ApolloClient({

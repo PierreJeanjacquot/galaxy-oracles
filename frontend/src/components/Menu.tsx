@@ -2,7 +2,6 @@ import { useState } from "react";
 import Logo from "./Logo";
 import ConnectButton from "./ConnectButton";
 import { Button } from "./ui/button";
-import { Link } from "lucide-react";
 
 function HomeMenu() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
