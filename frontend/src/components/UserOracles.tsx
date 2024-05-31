@@ -13,7 +13,6 @@ import { Button } from "./ui/button";
 
 function UserOracles() {
   const { address } = useAccount();
-
   const { oracles, loading, error } = useOraclesList({ owner: address });
   const navigate = useNavigate();
 
@@ -29,36 +28,40 @@ function UserOracles() {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
-      <h2>Your oracles</h2>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Your oracles</h2>
       {oracles.length > 0 ? (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateRows: "auto",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: "1rem",
-          }}
-        >
-          {oracles.map((oracle) => {
+        <div className="flex flex-wrap -mx-2">
+          {oracles.map(oracle => {
             const { oracleCid, oracleSigner } = parseOracleName(oracle.name);
             return (
-              <Card key={oracle.id}>
-                <CardHeader>
-                  <CardTitle>{oracle.id}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>owned by {oracle.owner.id}</p>
-                  <p>code: {oracleCid}</p>
-                  <p>signer: {oracleSigner}</p>
-                </CardContent>
-                <CardFooter>
-                  <Button onClick={createOracleLink(oracle.id)}>Show</Button>
-                  <Button onClick={createManageOracleLink(oracle.id)}>
-                    Manage
-                  </Button>
-                </CardFooter>
-              </Card>
+              <div key={oracle.id} className="w-full sm:w-1/2 md:w-1/3 p-2">
+                <Card className="cursor-pointer hover:shadow-lg h-full">
+                  <CardHeader>
+                    <CardTitle className="truncate">{oracle.id}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="truncate">
+                      <span className="font-bold text-blue-500">Owned by:</span>{" "}
+                      {oracle.owner.id}
+                    </p>
+                    <p className="truncate">
+                      <span className="font-bold text-gray-700">Code:</span>{" "}
+                      {oracleCid}
+                    </p>
+                    <p className="truncate">
+                      <span className="font-bold text-green-500">Signer:</span>{" "}
+                      {oracleSigner}
+                    </p>
+                  </CardContent>
+                  <CardFooter className="flex justify-between">
+                    <Button onClick={createOracleLink(oracle.id)}>Show</Button>
+                    <Button onClick={createManageOracleLink(oracle.id)}>
+                      Manage
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </div>
             );
           })}
         </div>
