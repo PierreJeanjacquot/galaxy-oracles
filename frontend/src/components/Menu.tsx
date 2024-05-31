@@ -51,7 +51,7 @@ function HomeMenu() {
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
                     <Link onClick={() => setIsOpen(false)} href="#donations">
-                      Donations
+                      xx
                     </Link>
                   </Button>
                 </li>
@@ -62,7 +62,7 @@ function HomeMenu() {
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
                     <Link onClick={() => setIsOpen(false)} href="#events">
-                      Events
+                      xx
                     </Link>
                   </Button>
                 </li>
@@ -73,7 +73,7 @@ function HomeMenu() {
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
                     <Link onClick={() => setIsOpen(false)} href="#features">
-                      Features
+                      xx
                     </Link>
                   </Button>
                 </li>
@@ -84,7 +84,7 @@ function HomeMenu() {
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
                     <Link onClick={() => setIsOpen(false)} href="#team">
-                      Team
+                      xx
                     </Link>
                   </Button>
                 </li>
