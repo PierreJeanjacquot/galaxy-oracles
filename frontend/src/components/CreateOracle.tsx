@@ -6,6 +6,7 @@ import useIExec from "../hooks/useIExec";
 import { add } from "../services/ipfs";
 import JSZip from "jszip";
 import { Button } from "./ui/button";
+import { TARGET_WORKERPOOL } from "@/utils/config";
 
 function CreateOracle() {
   const { address } = useAccount();
@@ -55,7 +56,7 @@ function CreateOracle() {
           APP,
           {
             requester,
-            workerpool: "debug-v8-bellecour.main.pools.iexec.eth", // run on debug pool
+            workerpool: TARGET_WORKERPOOL, // run on debug pool
             maxTag: TAG,
           }
         );
@@ -66,7 +67,7 @@ function CreateOracle() {
         // fetch workerpoolorder
         const { orders: workerpoolorders } =
           await iexec.orderbook.fetchWorkerpoolOrderbook({
-            workerpool: "debug-v8-bellecour.main.pools.iexec.eth", // run on debug pool
+            workerpool: TARGET_WORKERPOOL, // run on debug pool
             requester,
             minTag: TAG, // find orders that provide at least tee scone
           });

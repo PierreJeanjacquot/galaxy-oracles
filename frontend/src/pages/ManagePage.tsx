@@ -2,7 +2,7 @@ import ManageMyOracle from "@/components/ManageMyOracle";
 import { useMatch } from "react-router-dom";
 
 function ManagePage() {
-  const match = useMatch(`/oracle/:address/*`);
+  const match = useMatch(`/myoracles/:address/*`);
   const address = match?.params.address || "";
 
   return (

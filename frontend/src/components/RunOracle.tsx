@@ -6,6 +6,7 @@ import { getOracleProofFromTask } from "../services/oracle-proof";
 import { Button } from "./ui/button";
 import useOracleData from "@/hooks/useOracleData";
 import { parseOracleName } from "@/utils/oracle-name-helper";
+import { TARGET_WORKERPOOL } from "@/utils/config";
 
 function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   const { isConnected, iexec } = useIExec();
@@ -52,7 +53,7 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
           oracleAppAddress,
           {
             requester,
-            workerpool: "debug-v8-bellecour.main.pools.iexec.eth", // run on debug pool
+            workerpool: TARGET_WORKERPOOL, // run on debug pool
             maxTag: TAG,
           }
         );
@@ -63,7 +64,7 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
         // fetch workerpoolorder
         const { orders: workerpoolorders } =
           await iexec.orderbook.fetchWorkerpoolOrderbook({
-            workerpool: "debug-v8-bellecour.main.pools.iexec.eth", // run on debug pool
+            workerpool: TARGET_WORKERPOOL, // run on debug pool
             requester,
             minTag: TAG, // find orders that provide at least tee scone
           });
