@@ -19,6 +19,7 @@ function ManageMyOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   const { oracleSigner, deployTaskid, oracleCid } = parseOracleName(
     oracle?.name || "Loading-Loading-Loading"
   );
+  console.log(deployTaskid);
 
   const onclickSetPrice = async () => {
     if (currentPrice) {
@@ -65,7 +66,7 @@ function ManageMyOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
       <div>
         <input
           value={newPrice}
-          onChange={(e) => setNewPrice(e.target.value)}
+          onChange={e => setNewPrice(e.target.value)}
         ></input>
         <Button disabled={!newPrice || !isConnected} onClick={onclickSetPrice}>
           Set Price
