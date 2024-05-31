@@ -4,8 +4,10 @@ import StartCreateButton from "../components/StartCreateButton";
 function OraclesPage() {
   return (
     <>
-      <OraclesGallery></OraclesGallery>
-      <StartCreateButton />
+      <div className="px-10">
+        <OraclesGallery></OraclesGallery>
+        <StartCreateButton />
+      </div>
     </>
   );
 }

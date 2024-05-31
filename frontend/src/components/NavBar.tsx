@@ -3,6 +3,7 @@ import { useAccount } from "wagmi";
 import Logo from "./Logo";
 import ConnectButton from "./ConnectButton";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 function HomeMenu() {
   const { isConnected } = useAccount();
@@ -13,9 +14,9 @@ function HomeMenu() {
       <div className="container relative lg:max-w-[1305px] lg:px-10">
         <div className="flex items-center justify-between">
           <div className="block py-4 lg:py-0">
-            <a href="/" className="block max-w-[145px] sm:max-w-[180px] ">
-              <Logo className="text-yellow-400" width={100} height={100} />
-            </a>
+            <Link to="/" className="block max-w-[145px] sm:max-w-[180px]">
+              <Logo className="text-yellow-400" width={80} height={80} />
+            </Link>
           </div>
           <button
             onClick={() => setIsOpen(true)}
@@ -51,7 +52,7 @@ function HomeMenu() {
                     variant="link"
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
-                    <a href="/create">Create</a>
+                    <Link to="/create">Create</Link>
                   </Button>
                 </li>
                 <li className="menu-item">
@@ -60,7 +61,7 @@ function HomeMenu() {
                     variant="link"
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
-                    <a href="/oracles">Gallery</a>
+                    <Link to="/oracles">Oracles</Link>
                   </Button>
                 </li>
                 {isConnected && (
@@ -70,7 +71,7 @@ function HomeMenu() {
                       variant="link"
                       className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                     >
-                      <a href="/myoracles">My Oracles</a>
+                      <Link to="/myoracles">My Oracles</Link>
                     </Button>
                   </li>
                 )}
@@ -80,7 +81,7 @@ function HomeMenu() {
                     variant="link"
                     className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
                   >
-                    <a href="#team">Contact</a>
+                    <Link to="#team">Contact</Link>
                   </Button>
                 </li>
               </ul>
