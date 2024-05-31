@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useAccount } from "wagmi";
 import Logo from "./Logo";
 import ConnectButton from "./ConnectButton";
 import { Button } from "./ui/button";
 
 function HomeMenu() {
+  const { isConnected } = useAccount();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <header className="navbar  top-0 left-0 z-50 w-full border-stroke bg-violet-400 duration-300 mb-20">
@@ -60,15 +63,17 @@ function HomeMenu() {
                     <a href="/oracles">Gallery</a>
                   </Button>
                 </li>
-                <li className="menu-item">
-                  <Button
-                    asChild
-                    variant="link"
-                    className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
-                  >
-                    <a href="/oracle/1">My Oracle</a>
-                  </Button>
-                </li>
+                {isConnected && (
+                  <li className="menu-item">
+                    <Button
+                      asChild
+                      variant="link"
+                      className="menu-scroll inline-flex items-center text-base font-medium text-black hover:text-redpraha   lg:py-7"
+                    >
+                      <a href="/myoracles">My Oracles</a>
+                    </Button>
+                  </li>
+                )}
                 <li className="menu-item">
                   <Button
                     asChild
