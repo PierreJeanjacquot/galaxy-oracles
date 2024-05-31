@@ -5,6 +5,7 @@ import ConnectButton from "./ConnectButton";
 import IExecAccountWidget from "./IExecAccountWidget";
 import CreateOracle from "./CreateOracle";
 import RunOracle from "./RunOracle";
+import AppChecksum from "./components/AppChecksum";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ function App() {
             <IExecAccountWidget />
             <CreateOracle />
             <RunOracle app="0x4a8ED63FC766016e04E68E5E7EAC8c873742fA33" />
+            <AppChecksum />
           </div>
         </div>
       </QueryClientProvider>
