@@ -5,6 +5,7 @@ import OraclesPage from "./OraclesPage";
 import OraclePage from "./OraclePage";
 import ManagePage from "./ManagePage";
 import MyOraclesPage from "./MyOraclesPage";
+import Contact from "./Contact";
 
 /**
  * defines application routes
@@ -14,6 +15,7 @@ const Router: FC = () => {
     <Routes>
       <Route path={"/create"} element={<CreatePage />} />
       <Route path={"/oracles"} element={<OraclesPage />} />
+      <Route path={"/contact"} element={<Contact />} />
       <Route path={"/oracle"}>
         <Route path={":address"} element={<OraclePage />}></Route>
       </Route>
