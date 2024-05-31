@@ -1,6 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import ConnectButton from "./ConnectButton";
 
 function NavBar() {
+  const navigate = useNavigate();
+  const onClick = () => {
+    navigate("/");
+  };
+
   return (
     <div
       style={{
@@ -9,7 +15,9 @@ function NavBar() {
         padding: "0 3rem",
       }}
     >
-      <h1 className="text-red-800">Galaxy oracles</h1>
+      <h1 onClick={onClick} className="text-red-800">
+        Galaxy oracles
+      </h1>
       <div style={{ margin: "auto 0 auto auto" }}>
         <ConnectButton />
       </div>
