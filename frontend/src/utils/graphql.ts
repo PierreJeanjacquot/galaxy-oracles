@@ -1,9 +1,14 @@
 /* eslint-disable no-console */
-import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from "@apollo/client";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
-  uri: "https://thegraph.bellecour.iex.ec/subgraphs/name/bellecour/poco-v5/graphql",
+  uri: "https://thegraph.bellecour.iex.ec/subgraphs/name/bellecour/poco-v5",
   cache: new InMemoryCache(),
 });
 

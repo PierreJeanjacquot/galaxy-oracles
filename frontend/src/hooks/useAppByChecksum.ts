@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getAppByChecksum } from "../queries/checksum";
 
 const useAppByChecksum = (checksum: string) => {
-  const [app, setApp] = useState(null);
+  const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -11,8 +11,8 @@ const useAppByChecksum = (checksum: string) => {
       try {
         setLoading(true);
         const data = await getAppByChecksum(checksum);
-
-        setApp(data.apps[0]);
+        console.log("data", data);
+        setApps(data.apps); // Set all apps instead of just the first one
       } catch (err) {
         setError(err);
       } finally {
@@ -23,7 +23,7 @@ const useAppByChecksum = (checksum: string) => {
     fetchData();
   }, [checksum]);
 
-  return { app, loading, error };
+  return { apps, loading, error };
 };
 
 export default useAppByChecksum;
