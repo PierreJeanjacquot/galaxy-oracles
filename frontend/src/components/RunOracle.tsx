@@ -20,8 +20,6 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
     oracle?.name || "Loading-Loading-Loading"
   );
 
-  console.log(oracleSigner, deployTaskid, oracleCid);
-
   const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [statusMessage, setStatusMessage] = useState("");
   const [dealid, setDealid] = useState<string | undefined>();
@@ -196,6 +194,17 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
             <tr>
               <td className="px-4 py-2 border-b font-bold">Oracle Signer</td>
               <td className="px-4 py-2 border-b">{oracleSigner}</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border-b font-bold">Check deployment</td>
+              <td className="px-4 py-2 border-b">
+                <a
+                  href={`https://explorer.iex.ec/bellecour/search/${deployTaskid}`}
+                  target="_blank"
+                >
+                  <span className="text-blue-400">{deployTaskid}</span>
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
