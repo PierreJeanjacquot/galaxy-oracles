@@ -2,6 +2,7 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { injected } from "wagmi/connectors";
 // import the bellecour configuration
 import { bellecour } from "../utils/wagmiConfig";
+import { Button } from "./ui/button";
 
 function ConnectButton() {
   const { isConnected, chainId } = useAccount();
@@ -17,7 +18,7 @@ function ConnectButton() {
 
   const text = isConnectedToBellecour ? "Disconnect" : "Connect";
 
-  return <button onClick={onClick}>{text}</button>;
+  return <Button onClick={onClick}>{text}</Button>;
 }
 
 export default ConnectButton;

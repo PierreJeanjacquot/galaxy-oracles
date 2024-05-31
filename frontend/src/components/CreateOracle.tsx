@@ -4,6 +4,7 @@ import { useAccount } from "wagmi";
 import useIExec from "../hooks/useIExec";
 import { add } from "../services/ipfs";
 import JSZip from "jszip";
+import { Button } from "./ui/button";
 
 function CreateOracle() {
   const { address } = useAccount();
@@ -200,14 +201,14 @@ function CreateOracle() {
           </textarea>
         </div>
       </p>
-      <button disabled={disabled} onClick={onclickRun}>
+      <Button disabled={disabled} onClick={onclickRun}>
         {isCreatingTask && statusMessage ? statusMessage : "Deploy oracle"}
-      </button>
+      </Button>
       <p>{taskid && `Deployment task running ${taskid} ${taskStatus}`}</p>
       <p>{deploymentError}</p>
       <p>{deployedAddress && `Oracle app deployed at ${deployedAddress} 🎉`}</p>
       {taskid && taskCompleted && (
-        <button onClick={onClickDownload}>Download deployment report</button>
+        <Button onClick={onClickDownload}>Download deployment report</Button>
       )}
     </div>
   );

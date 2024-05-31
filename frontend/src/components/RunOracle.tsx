@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useIExec from "../hooks/useIExec";
 import { OracleProof } from "../types/types";
 import { getOracleProofFromTask } from "../services/oracle-proof";
+import { Button } from "./ui/button";
 
 function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   const { isConnected, iexec } = useIExec();
@@ -157,9 +158,9 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   return (
     <div>
       <h2>Run oracle {oracleAppAddress}</h2>
-      <button disabled={disabled} onClick={onclickRun}>
+      <Button disabled={disabled} onClick={onclickRun}>
         {isCreatingTask && statusMessage ? statusMessage : "Run oracle"}
-      </button>
+      </Button>
       <p>{taskid && `Oracle task running ${taskid} ${taskStatus}`}</p>
       <p>{oracleRunError}</p>
       {proof && (
@@ -169,7 +170,7 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
         </>
       )}
       {taskid && taskCompleted && (
-        <button onClick={onClickDownload}>Download oracle report</button>
+        <Button onClick={onClickDownload}>Download oracle report</Button>
       )}
     </div>
   );

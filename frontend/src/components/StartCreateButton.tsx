@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useIExec from "../hooks/useIExec";
+import { Button } from "./ui/button";
 
 function StartCreateButton() {
   const { isConnected } = useIExec();
@@ -9,9 +10,9 @@ function StartCreateButton() {
   };
 
   return (
-    <button disabled={!isConnected} onClick={onClick}>
+    <Button disabled={!isConnected} onClick={onClick}>
       Start building
-    </button>
+    </Button>
   );
 }
 
