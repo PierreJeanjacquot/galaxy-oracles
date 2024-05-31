@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import useIExec from "./hooks/useIExec";
-import { OracleProof } from "./types";
-import { getOracleProofFromTask } from "./services/oracle-proof";
+import useIExec from "../hooks/useIExec";
+import { OracleProof } from "../types/types";
+import { getOracleProofFromTask } from "../services/oracle-proof";
 
 function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   const { isConnected, iexec } = useIExec();

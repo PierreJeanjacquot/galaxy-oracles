@@ -1,6 +1,6 @@
 import { IExec } from "iexec";
 import JSZip from "jszip";
-import { OracleProof, OracleResult } from "../types";
+import { OracleProof, OracleResult } from "../types/types";
 
 export const getOracleResultFromTask = async (
   taskid: string

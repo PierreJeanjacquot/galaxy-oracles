@@ -1,5 +1,5 @@
 import { ImportCandidate, create } from "kubo-rpc-client";
-import { IPFS_GATEWAY_URL, IPFS_UPLOAD_URL } from "../config";
+import { IPFS_GATEWAY_URL, IPFS_UPLOAD_URL } from "../utils/config";
 
 const add = async (content: ImportCandidate): Promise<string> => {
   const ipfs = create({ url: IPFS_UPLOAD_URL });

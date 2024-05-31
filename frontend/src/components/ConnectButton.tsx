@@ -1,7 +1,7 @@
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { injected } from "wagmi/connectors";
 // import the bellecour configuration
-import { bellecour } from "./wagmiConfig";
+import { bellecour } from "../utils/wagmiConfig";
 
 function ConnectButton() {
   const { isConnected, chainId } = useAccount();

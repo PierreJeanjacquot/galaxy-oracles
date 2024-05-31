@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useIExec from "./hooks/useIExec";
+import useIExec from "../hooks/useIExec";
 import { BN, formatRLC } from "iexec/utils";
 
 function IExecAccountWidget() {

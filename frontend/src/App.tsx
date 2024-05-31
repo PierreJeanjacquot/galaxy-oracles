@@ -1,7 +1,7 @@
-import ConnectButton from "./ConnectButton";
-import IExecAccountWidget from "./IExecAccountWidget";
-import CreateOracle from "./CreateOracle";
-import RunOracle from "./RunOracle";
+import ConnectButton from "./components/ConnectButton";
+import IExecAccountWidget from "./components/IExecAccountWidget";
+import CreateOracle from "./components/CreateOracle";
+import RunOracle from "./components/RunOracle";
 import OraclesGallery from "./components/OraclesGallery";
 
 function App() {

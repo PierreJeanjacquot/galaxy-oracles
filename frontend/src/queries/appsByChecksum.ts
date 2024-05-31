@@ -1,4 +1,4 @@
-import { SubgraphOracleData } from "../types";
+import { SubgraphOracleData } from "../types/types";
 import { processRequest } from "../utils/graphql";
 
 export const getAppsByChecksum = async (

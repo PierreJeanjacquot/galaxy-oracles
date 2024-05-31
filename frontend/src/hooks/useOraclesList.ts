@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAppsByChecksum } from "../queries/appsByChecksum";
-import { ORACLE_APP_CHECKSUM } from "../config";
-import { SubgraphOracleData } from "../types";
+import { ORACLE_APP_CHECKSUM } from "../utils/config";
+import { SubgraphOracleData } from "../types/types";
 
 const useOraclesList = () => {
   const [oracles, setOracles] = useState<SubgraphOracleData[]>([]);
