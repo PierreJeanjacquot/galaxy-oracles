@@ -1,9 +1,5 @@
-import ConnectButton from "./components/ConnectButton";
-import IExecAccountWidget from "./components/IExecAccountWidget";
-import CreateOracle from "./components/CreateOracle";
-import RunOracle from "./components/RunOracle";
-import OraclesGallery from "./components/OraclesGallery";
 import NavBar from "./components/NavBar";
+import Router from "./pages/router";
 
 function App() {
   return (
@@ -14,12 +10,7 @@ function App() {
       }}
     >
       <NavBar />
-      <div style={{ padding: "1rem 3rem", display: "grid", gap: "1rem" }}>
-        <IExecAccountWidget />
-        <CreateOracle />
-        <RunOracle app="0x4a8ED63FC766016e04E68E5E7EAC8c873742fA33" />
-        <OraclesGallery />
-      </div>
+      <Router />
     </div>
   );
 }
