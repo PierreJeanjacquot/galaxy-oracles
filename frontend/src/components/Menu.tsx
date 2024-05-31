@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Logo from "./Logo";
 import ConnectButton from "./ConnectButton";
-import { Button } from "../ui/components/ui/button";
+import { Button } from "./ui/button";
 import { Link } from "lucide-react";
 
 function HomeMenu() {
