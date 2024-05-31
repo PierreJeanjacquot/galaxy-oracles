@@ -169,14 +169,36 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
   }, [iexec, taskid, dealid]);
 
   return (
-    <div>
-      <h2>Run oracle {oracleAppAddress}</h2>
-      <div>oracle cid: {oracleCid}</div>
-      <div>oracle code: {oracleCode}</div>
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Run Oracle {oracleAppAddress}</h2>
+      <div className="overflow-x-auto mb-4">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr>
+              <th className="px-4 py-2 border-b">Field</th>
+              <th className="px-4 py-2 border-b">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="px-4 py-2 border-b font-bold">Oracle CID</td>
+              <td className="px-4 py-2 border-b">{oracleCid}</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border-b font-bold">Oracle Code</td>
+              <td className="px-4 py-2 border-b">{oracleCode}</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border-b font-bold">Oracle Signer</td>
+              <td className="px-4 py-2 border-b">{oracleSigner}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <Button disabled={disabled} onClick={onclickRun}>
         {isCreatingTask && statusMessage
           ? statusMessage
-          : "Run oracle on iExec"}
+          : "Run Oracle on iExec"}
       </Button>
       <p>{taskid && `Oracle task running ${taskid} ${taskStatus}`}</p>
       <p>{oracleRunError}</p>
@@ -187,7 +209,7 @@ function RunOracle({ app: oracleAppAddress }: Readonly<{ app: string }>) {
         </>
       )}
       {taskid && taskCompleted && (
-        <Button onClick={onClickDownload}>Download oracle report</Button>
+        <Button onClick={onClickDownload}>Download Oracle Report</Button>
       )}
     </div>
   );
