@@ -1,6 +1,6 @@
 # galaxy-oracles
 
-Deploy custom oracles generating off-chon proof verifiable on any EVM blockchain.
+Deploy custom oracles generating off-chain proof verifiable on any EVM blockchain.
 
 ## Run
 
